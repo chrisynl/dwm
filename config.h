@@ -34,8 +34,8 @@ static const unsigned int alphas[][3]      = {
 };
 
 /* tagging */
-//static const char *tags[] = { "一", "二", "三", "四", "五", "六", "七", "八", "九" };
-static const char *tags[] = { "\uf120", "\uf7ae", "\uf121", "\uf04b", "\ue62e", "\uf251", "\ue727", "\uf537", "\uf684" };
+static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+//static const char *tags[] = { "\uf120", "\uf7ae", "\uf121", "\uf04b", "\ue62e", "\uf251", "\ue727", "\uf537", "\uf684" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -79,6 +79,8 @@ static const char *rofi[] = { "/usr/bin/rofi", "-modi", "drun", "-show", "drun",
 static const char *vol_up[] = { "/home/chris/myscripts/vol-up.sh", NULL};
 static const char *vol_down[] = { "/home/chris/myscripts/vol-down.sh", NULL};
 static const char *vol_taggle[] = { "/home/chris/myscripts/vol-toggle.sh", NULL};
+static const char *chromium[] = { "/usr/bin/chromium-browser", "--proxy-server=127.0.0.1:12333", "--proxy-pac-url=http://127.0.0.1:2333/proxy.pac", NULL };
+static const char *ptrsc[] = {"/usr/bin/deepin-screenshot", NULL};
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -86,6 +88,9 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
     { MODKEY,                       XK_a,      spawn,          {.v = tray} },
     { MODKEY,                       XK_space,  spawn,          {.v = rofi} },
+	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = chromium} },
+    { MODKEY|ShiftMask,             XK_s,      spawn,          {.v = ptrsc} },
+    { 0,                            XF86XK_ScreenSaver,      spawn,          {.v = ptrsc} },
     { 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = vol_up} },
     { 0,                            XF86XK_AudioLowerVolume, spawn, {.v = vol_down} },
     { 0,                            XF86XK_AudioMute, spawn, {.v = vol_taggle} },
@@ -112,7 +117,7 @@ static Key keys[] = {
 	{ MODKEY|Mod4Mask,              XK_o,      incrohgaps,     {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_y,      incrovgaps,     {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_o,      incrovgaps,     {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
+//	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
