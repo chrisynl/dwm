@@ -90,7 +90,6 @@ static Key keys[] = {
     { MODKEY,                       XK_space,  spawn,          {.v = rofi} },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = chromium} },
     { MODKEY|ShiftMask,             XK_s,      spawn,          {.v = ptrsc} },
-    { 0,                            XF86XK_ScreenSaver,      spawn,          {.v = ptrsc} },
     { 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = vol_up} },
     { 0,                            XF86XK_AudioLowerVolume, spawn, {.v = vol_down} },
     { 0,                            XF86XK_AudioMute, spawn, {.v = vol_taggle} },
