@@ -79,7 +79,7 @@ static const char *rofi[] = { "/usr/bin/rofi", "-modi", "drun", "-show", "drun",
 static const char *vol_up[] = { "/home/chris/myscripts/vol-up.sh", NULL};
 static const char *vol_down[] = { "/home/chris/myscripts/vol-down.sh", NULL};
 static const char *vol_taggle[] = { "/home/chris/myscripts/vol-toggle.sh", NULL};
-static const char *chromium[] = { "/usr/bin/chromium-browser", "--proxy-server=127.0.0.1:12333", "--proxy-pac-url=http://127.0.0.1:2333/proxy.pac", NULL };
+static const char *chromium[] = { "/usr/bin/chromium", "--proxy-server=127.0.0.1:12333", "--proxy-pac-url=http://127.0.0.1:2333/proxy.pac", NULL };
 static const char *ptrsc[] = {"/usr/bin/deepin-screenshot", NULL};
 
 static Key keys[] = {
