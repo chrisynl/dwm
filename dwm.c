@@ -195,6 +195,8 @@ static void hide(Client *c);
 static void incnmaster(const Arg *arg);
 static void keypress(XEvent *e);
 static void killclient(const Arg *arg);
+static void keyhiddenwin(const Arg *arg);
+static void keyrestorewin(const Arg *arg);
 static void manage(Window w, XWindowAttributes *wa);
 static void mappingnotify(XEvent *e);
 static void maprequest(XEvent *e);
@@ -306,6 +308,10 @@ static int useargb = 0;
 static Visual *visual;
 static int depth;
 static Colormap cmap;
+
+#define hiddenWinStackMax 100
+static int hiddenWinStackTop = -1;
+static Client *hiddenWinStack[hiddenWinStackMax];
 
 /* configuration, allows nested code to access above variables */
 #include "config.h"
@@ -1202,6 +1208,37 @@ killclient(const Arg *arg)
 		XSetErrorHandler(xerror);
 		XUngrabServer(dpy);
 	}
+}
+
+/* using keyboard to hidden window */
+void
+keyhiddenwin(const Arg *arg)
+{
+    if (!selmon->sel)
+        return;
+    Client *c = (Client *)selmon->sel;
+    hide(c);
+    hiddenWinStack[++hiddenWinStackTop] = c;
+}
+
+void
+keyrestorewin(const Arg *arg)
+{
+    int i = hiddenWinStackTop;
+    while (i > -1) {
+        if (HIDDEN(hiddenWinStack[i]) &&
+            hiddenWinStack[i]->tags == selmon->tagset[selmon->seltags]) {
+            show(hiddenWinStack[i]);
+            focus(hiddenWinStack[i]);
+            restack(selmon);
+            for (int j = i; j < hiddenWinStackTop; ++j) {
+                hiddenWinStack[j] = hiddenWinStack[j + 1];
+            }
+            --hiddenWinStackTop;
+            return;
+        }
+        --i;
+    }
 }
 
 void
@@ -2122,6 +2159,7 @@ void
 togglewin(const Arg *arg)
 {
 	Client *c = (Client*)arg->v;
+	if (c == NULL) return;
 	if (c == selmon->sel)
 		hide(c);
 	else {

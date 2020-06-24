@@ -85,16 +85,18 @@ static const char *lock_screen[] = {"/usr/bin/slock", NULL};
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+	/*{ MODKEY,                     XK_p,      spawn,          {.v = dmenucmd } },*/
+	{ MODKEY,                       XK_p,      keyhiddenwin,      {0} },
+	{ MODKEY|ShiftMask,             XK_p,      keyrestorewin,      {0} },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-        { MODKEY,                       XK_a,      spawn,          {.v = tray} },
-        { MODKEY,                       XK_space,  spawn,          {.v = rofi} },
+    { MODKEY,                       XK_a,      spawn,          {.v = tray} },
+    { MODKEY,                       XK_space,  spawn,          {.v = rofi} },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = chromium} },
-        { MODKEY|ShiftMask,             XK_s,      spawn,          {.v = ptrsc} },
-        { MODKEY|ShiftMask,             XK_l,      spawn,          {.v = lock_screen }},
-        { 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = vol_up} },
-        { 0,                            XF86XK_AudioLowerVolume, spawn, {.v = vol_down} },
-        { 0,                            XF86XK_AudioMute, spawn, {.v = vol_taggle} },
+    { MODKEY|ShiftMask,             XK_s,      spawn,          {.v = ptrsc} },
+    { MODKEY|ShiftMask,             XK_l,      spawn,          {.v = lock_screen }},
+    { 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = vol_up} },
+    { 0,                            XF86XK_AudioLowerVolume, spawn, {.v = vol_down} },
+    { 0,                            XF86XK_AudioMute, spawn, {.v = vol_taggle} },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
