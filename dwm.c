@@ -1592,7 +1592,7 @@ void run(void) {
 void runAutostart(void) {
   if (system("cd ~/.dwm; ./autostart_blocking.sh"))
     ;
-  if (system("cd /home/chris/myscripts; ./autostart.sh &"))
+  if (system("cd /home/chris/.config/myscripts; ./autostart.sh &"))
     ;
 }
 
